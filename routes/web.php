@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\Admin\TypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +28,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('projects', ProjectController::class)->parameters([
         'projects' => 'project:slug'
     ]);
+    Route::resource('types', TypeController::class)->except(['show', 'create', 'edit']);
+    Route::resource('technologies', TechnologyController::class)->except(['show', 'create', 'edit']);
 });
 
 require __DIR__ . '/auth.php';
