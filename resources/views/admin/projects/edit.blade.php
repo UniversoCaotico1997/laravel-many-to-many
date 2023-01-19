@@ -47,6 +47,28 @@
         </div>
         <!-- /.Type -->
 
+        <!-- Technology -->
+        <div class="mb-3">
+            <label for="technologies" class="form-label">Technologies</label>
+            <select multiple class="form-select form-select-sm" name="technologies[]" id="technologies">
+                <option value="" disabled>Select a Technology</option>
+                @forelse ($technologies as $technology)
+
+                @if ($errors->any())
+                <!-- Pagina con errori di validazione, deve usare old per verificare quale id di tag preselezionare -->
+                <option value="{{$technology->id}}" {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>{{$technology->name}}</option>
+                @else
+                <!-- Pagina caricate per la prima volta: deve mostrarare i tag preseleziononati dal db -->
+                <option value="{{$technology->id}}" {{ $project->technologies->contains($technology->id) ? 'selected' : ''}}>{{$technology->name}}</option>
+                @endif
+                @empty
+                <option value="" disabled>No Technologies in the system</option>
+                @endforelse
+
+            </select>
+        </div>
+        <!-- /.Technology -->
+
         <!-- Description -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
