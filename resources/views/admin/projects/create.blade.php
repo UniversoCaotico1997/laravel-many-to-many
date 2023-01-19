@@ -39,6 +39,22 @@
         </div>
         <!-- /.Type -->
 
+        <!-- Technology -->
+        <div class="mb-3">
+            <label for="technologies" class="form-label">Select a Technologies</label>
+            <select multiple class="form-select form-select-sm" name="technologies[]" id="technologies">
+
+
+                @forelse ($technologies as $technology)
+                <option value="{{$technology->id}}" {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>{{$technology->name}}</option>
+                @empty
+                <option value="" disabled>No Technologies in the system</option>
+                @endforelse
+
+            </select>
+        </div>
+        <!-- /.Technology -->
+
         <!-- Description -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,10 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         // dd($type);
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        // dd($technologies);
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
