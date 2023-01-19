@@ -10,10 +10,27 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'cover_image', 'type_id', 'description'];
+    protected $fillable = ['title', 'slug', 'cover_image', 'description', 'type_id', 'user_id'];
 
-    public function type()
+
+    /**
+     * Get the type that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
+    }
+
+
+    /**
+     * Get the type that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

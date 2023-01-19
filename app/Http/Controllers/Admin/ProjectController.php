@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -19,6 +20,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        // ci permette di visualizzare i post creati da un singolo user 
+        // $projects = Auth::user()->projects;
+
         $projects = Project::orderByDesc('id')->get();
 
         return view('admin.projects.index', compact('projects'));
@@ -70,6 +74,9 @@ class ProjectController extends Controller
         $val_data['slug'] = $project_slug;
         // dd($val_data);
 
+
+        // assegnazione del post corrente autenticato user
+        $val_data['user_id'] = Auth::id();
 
         // // Creazione dei nuovi dati validati
         $project = Project::create($val_data);

@@ -13,7 +13,13 @@ class Type extends Model
 
     protected $fillable = ['Programming', 'Laravel', 'Vuejs', 'Front-end', 'Back-end', 'Full-stack'];
 
-    public function projects()
+
+    /**
+     * Get all of the products for the Type
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class);
     }
