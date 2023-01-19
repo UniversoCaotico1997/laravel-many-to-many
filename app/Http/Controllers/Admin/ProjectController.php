@@ -85,6 +85,11 @@ class ProjectController extends Controller
         // // Creazione dei nuovi dati validati
         $project = Project::create($val_data);
 
+        // attach the selected tags
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($val_data['technologies']);
+        }
+
         // Ritorniamo allo rotta index
         return to_route('admin.projects.index')->with('message', "Project id: $project->id added successfully");
     }
